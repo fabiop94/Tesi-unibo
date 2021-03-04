@@ -1,0 +1,60 @@
+% !TeX root = ./tesi.tex
+% !TeX encoding = UTF-8 Unicode
+% !TeX spellcheck = it_IT
+% !TeX program = arara
+% !TeX options = --log --verbose --language=it "%DOC%"
+
+% arara: lualatex:      { interaction: batchmode }
+% arara: frontespizio:  { interaction: batchmode, engine: lualatex }
+% arara: biber
+% arara: lualatex:      { interaction: batchmode }
+% arara: lualatex:      { interaction: nonstopmode, synctex: yes }
+
+\documentclass[%
+  a4paper,                % formato di pagina A4
+  12pt,                   % corpo del testo a 12pt
+  % la dimensione 12pt automaticamente imposta \footnotesize a 10pt
+  twoside,                % (oneside|twoside) documento a singola o doppia facciata,
+  openright,              % (openany|openright) fa cominciare un capitolo nella successiva pagina a disposizione o sempre in una pagina destra
+  % twocolumn,            % dà a LaTeX le istruzioni per comporre l'intero documento su due colonne
+  titlepage,              % (titlepage|notitlepage) se dopo il titolo del documento debbaavere  inizio  una  nuova  pagina
+  % fleqn,                % allinea le formule a sinistra rispetto a un margine rientrato
+  % leqno,                % mette la numerazione delle formule a sinistra anziché a destra
+  final                   % (draft|final) scelta tra bozza o finale, influenza il comportamento degli altri pacchetti
+]{scrbook}
+
+\usepackage{fancyvrb}       % fornisce l'ambiente VerbatimOut e modifica listati di codice
+
+\begin{VerbatimOut}{\jobname.xmpdata}
+\Title{Titolo}
+\Subject{Oggetto}
+\Author{Niccolò Maltoni}
+\Copyright{Questo documento è fornito sotto licenza Apache License, Version 2.0}
+\CopyrightURL{https://opensource.org/licenses/Apache-2.0}
+\end{VerbatimOut}
+
+\usepackage{unibotesi}
+
+\begin{document}
+
+  \frontmatter{}
+  \pagenumbering{Roman}
+  \pagestyle{empty}
+  \input{src/1-frontmatter/frontespizio.tex}
+  \input{src/1-frontmatter/keywords.tex}
+  \input{src/1-frontmatter/dedica.tex}
+  \input{src/1-frontmatter/abstract.tex}
+  \tableofcontents
+
+  \mainmatter{}
+  \pagenumbering{arabic}
+  \pagestyle{headings}
+  Minimo documento
+  \appendix
+  \input{src/2-mainmatter/appendices.tex}
+
+  \backmatter{}
+  \input{src/3-backmatter/bibliografia.tex}
+  \input{src/3-backmatter/ringraziamenti.tex}
+
+\end{document}
